@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cozy Classroom MVP</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <h1>🌼 Cozy Classroom</h1>
+      <p class="subtitle">Teach your AI class, reinforce your own understanding.</p>
+      <div class="streak" id="streakBadge">Streak: 0 days</div>
+    </header>
+
+    <main class="layout">
+      <section class="panel planner">
+        <h2>Lesson Planner</h2>
+        <form id="lessonForm">
+          <label>
+            Topic
+            <input id="topic" required placeholder="e.g., Binary Search" />
+          </label>
+
+          <label>
+            Learning objective
+            <textarea id="objective" required placeholder="Explain the invariant and time complexity"></textarea>
+          </label>
+
+          <label>
+            Mode
+            <select id="mode">
+              <option value="quick">Quick Drill (10m)</option>
+              <option value="standard" selected>Standard Class (25m)</option>
+              <option value="deep">Deep Seminar (45m)</option>
+            </select>
+          </label>
+
+          <label>
+            Source notes (optional)
+            <textarea id="materials" placeholder="Paste notes, examples, or reminders"></textarea>
+          </label>
+
+          <button type="submit">Start Class</button>
+        </form>
+      </section>
+
+      <section class="panel classroom" id="classroomPanel">
+        <h2>Classroom Session</h2>
+        <div id="classStatus" class="status">Plan a lesson to begin.</div>
+
+        <div class="room" id="room"></div>
+
+        <div class="teachBox">
+          <label>
+            Teach / explain
+            <textarea id="teachInput" placeholder="Teach a concept, give an example, or explain a misconception..."></textarea>
+          </label>
+          <div class="actions">
+            <button id="teachBtn" disabled>Deliver Explanation</button>
+            <button id="askCheckBtn" disabled>Run Mini Check</button>
+          </div>
+        </div>
+
+        <div class="queueWrap">
+          <h3>🙋 Hand Raise Queue</h3>
+          <ul id="questionQueue" class="queue"></ul>
+          <button id="respondBtn" disabled>Respond to next student</button>
+        </div>
+      </section>
+
+      <section class="panel analytics">
+        <h2>Reflection Dashboard</h2>
+        <div class="metrics" id="metrics"></div>
+
+        <h3>Recent Lesson Log</h3>
+        <ul id="history" class="history"></ul>
+      </section>
+    </main>
+
+    <template id="studentCardTemplate">
+      <article class="student">
+        <div class="avatar"></div>
+        <h4 class="name"></h4>
+        <p class="archetype"></p>
+        <div class="meter">
+          <span>Mastery</span>
+          <progress max="100" value="0"></progress>
+        </div>
+        <div class="meter">
+          <span>Confidence</span>
+          <progress max="100" value="0"></progress>
+        </div>
+        <p class="mood"></p>
+      </article>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
