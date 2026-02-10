@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cozy Classroom MVP</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="gameShell">
+      <header class="topHud">
+        <div class="brand">🌼 Cozy Classroom</div>
+        <div id="phaseBadge" class="pill">Lobby</div>
+        <div id="streakBadge" class="pill">Streak: 0 days</div>
+        <div id="voiceStatus" class="pill">🎙️ Voice idle</div>
+      </header>
+
+      <main id="classroom3d" aria-label="3D classroom scene"></main>
+
+      <section id="interactionHint" class="interactionHint hidden">Press <kbd>E</kbd> to interact</section>
+      <section id="statusToast" class="statusToast">Walk to the podium to start a lesson, or visit students to chat.</section>
+
+      <aside class="bottomHud">
+        <span class="hudInfo">Move: WASD / Arrows • Interact: E</span>
+        <button id="openTeachBtn" class="hudBtn primary">🎙️ Voice Console</button>
+        <button id="openQueueBtn" class="hudBtn">🙋 Queue</button>
+        <button id="openAnalyticsBtn" class="hudBtn">📊 Progress</button>
+      </aside>
+
+      <section id="plannerPanel" class="overlayPanel hidden" aria-label="Lesson planner panel">
+        <div class="overlayHeader">
+          <h2>📚 Podium Lesson Setup</h2>
+          <button class="closeBtn" data-close="plannerPanel">✕</button>
+        </div>
+        <p class="flavor">Set your lesson goal before class begins. Students will adapt their questions to your objective.</p>
+        <form id="lessonForm">
+          <label>
+            Topic
+            <input id="topic" required placeholder="e.g., Binary Search" />
+          </label>
+          <label>
+            Learning objective
+            <textarea id="objective" required placeholder="Teach core idea + 1 worked example + 1 misconception"></textarea>
+          </label>
+          <label>
+            Mode
+            <select id="mode">
+              <option value="quick">Quick Drill (10m)</option>
+              <option value="standard" selected>Standard Class (25m)</option>
+              <option value="deep">Deep Seminar (45m)</option>
+            </select>
+          </label>
+          <label>
+            Materials / lesson notes
+            <textarea id="materials" placeholder="Paste notes, formulas, examples, or checklist"></textarea>
+          </label>
+          <button type="submit">Start Lesson</button>
+        </form>
+      </section>
+
+      <section id="teachPanel" class="overlayPanel hidden" aria-label="Teaching console panel">
+        <div class="overlayHeader">
+          <h2>🎙️ Teaching Console</h2>
+          <button class="closeBtn" data-close="teachPanel">✕</button>
+        </div>
+
+        <div class="voiceRow">
+          <button id="startVoiceBtn" class="primary">Start Voice</button>
+          <button id="stopVoiceBtn" disabled>Stop Voice</button>
+        </div>
+
+        <label>
+          Transcript (voice-first, text fallback)
+          <textarea id="teachInput" placeholder="Voice transcript appears here. Type if your browser/mic is unavailable."></textarea>
+        </label>
+
+        <div class="voiceRow">
+          <button id="teachBtn" disabled>Deliver Explanation</button>
+          <button id="askCheckBtn" disabled>Run Mini Check</button>
+        </div>
+
+        <button id="endLessonBtn" class="danger" disabled>End Lesson & Reflect</button>
+      </section>
+
+      <section id="queuePanel" class="overlayPanel hidden" aria-label="Question queue panel">
+        <div class="overlayHeader">
+          <h2>🙋 Hand Raise Queue</h2>
+          <button class="closeBtn" data-close="queuePanel">✕</button>
+        </div>
+        <ul id="questionQueue" class="queue"></ul>
+        <div class="voiceRow">
+          <button id="respondBtn" disabled>Respond to Next Student</button>
+          <button id="speakQuestionBtn" disabled>🔊 Speak Next Question</button>
+        </div>
+      </section>
+
+      <section id="studentPanel" class="overlayPanel hidden" aria-label="Student profile panel">
+        <div class="overlayHeader">
+          <h2>🐾 Student Profile</h2>
+          <button class="closeBtn" data-close="studentPanel">✕</button>
+        </div>
+        <div id="studentProfile"></div>
+      </section>
+
+      <section id="analyticsPanel" class="overlayPanel hidden" aria-label="Analytics panel">
+        <div class="overlayHeader">
+          <h2>📊 Classroom Progress</h2>
+          <button class="closeBtn" data-close="analyticsPanel">✕</button>
+        </div>
+        <div id="metrics" class="metrics"></div>
+        <h3>Recent Lesson Log</h3>
+        <ul id="history" class="history"></ul>
+      </section>
+
+      <section id="reflectionPanel" class="overlayPanel hidden" aria-label="Post lesson reflection panel">
+        <div class="overlayHeader">
+          <h2>🌟 Lesson Reflection</h2>
+          <button class="closeBtn" data-close="reflectionPanel">✕</button>
+        </div>
+        <div id="reflectionBody"></div>
+      </section>
+    </div>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
